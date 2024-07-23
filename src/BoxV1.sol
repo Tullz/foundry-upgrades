@@ -11,12 +11,12 @@ import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/Own
 
 //proxy doesnt use constructors, they use initilizers instead
 
-contract BoxV1 is UUPSUpgradeable, Initializable, OwnableUpgradeable {
+contract BoxV1 is Initializable, OwnableUpgradeable, UUPSUpgradeable {
     uint256 internal number;
 
     function initialize() public initializer {
-        __Ownable_init(); //sets owner to msg.sender - prepended with double underscore as its an initializer function
-        __UUPSUpgradeable_init(); 
+        __Ownable_init(msg.sender); //sets owner to msg.sender - prepended with double underscore as its an initializer function
+        __UUPSUpgradeable_init();
     }
 
     function getNumber() external view returns (uint256) {
